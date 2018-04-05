@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jschaefer-io/tpbuiler.git"
@@ -15,7 +17,17 @@
   },
   "homepage": "https://github.com/jschaefer-io/tpbuiler#readme",
   "dependencies": {
+    "glob": "^7.1.2",
     "html-entities": "^1.2.1",
-    "htmlparser2": "^3.9.2"
+    "htmlparser2": "^3.9.2",
+    "js-beautify": "^1.7.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
