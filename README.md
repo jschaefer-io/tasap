@@ -5,7 +5,7 @@ tasap.js is a HTML-Template-Engine meant to build modular HTML-**T**emplates **a
 ## Example
 
 ### Defining a module
-Reusable Modules get defined with the <Module> Tag. The tags-attributes get loaded into the Modules local state and can recieve data on module initialisation.  `-> ./modules/offer.html`
+Reusable Modules get defined with the `<Module name="ModuleName">` Tag. The tags-attributes get loaded into the Modules local state and can recieve data on module initialisation.  `-> ./modules/offer.html`
 ``` html
 <Module name="Offer" title="no title set" description="no description" link="#no-link">
 	<article class="offer">
@@ -42,7 +42,7 @@ tasap.js offers two ways to interact with data. `{{ }}` evaluates the expression
 ### Loading Modules
 Modules can be anywhere inside the HTML-File. If you move the modules to individual files like I did in this example. You can use `{{@ }}` to load files or directories dynamically. `-> ./index.html`
 ``` html
-{{@ modules/*.html }}
+{{@ ./modules/*.html }}
 <Row>
 	<Column sizes="small-12 medium-3 large-7">
 		<Offer title="Car 1" description="This car is amazing" link="/link-to-car1.html"></Offer>

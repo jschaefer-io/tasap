@@ -20,6 +20,9 @@ class ModuleNode extends Node{
 		}
 		this.state.Block = ()=>Node.renderArray(this.moduleChildren);
 	}
+	pushState(){
+		return;
+	}
 }
 
 module.exports = ModuleNode;
