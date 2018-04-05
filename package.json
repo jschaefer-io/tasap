@@ -1,0 +1,21 @@
+{
+  "name": "tpbuiler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jschaefer-io/tpbuiler.git"
+  },
+  "author": "Jannik Schäfer <me@jschaefer.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jschaefer-io/tpbuiler/issues"
+  },
+  "homepage": "https://github.com/jschaefer-io/tpbuiler#readme",
+  "dependencies": {
+    "html-entities": "^1.2.1",
+    "htmlparser2": "^3.9.2"
+  }
+}
