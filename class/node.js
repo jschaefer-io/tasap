@@ -34,13 +34,14 @@ class Node extends Element{
 				out += '</' + this.name + '>';
 			}
 		}
+		this.pushState();
 		return out;
 	}
 
 	getAttributeString(){
 		let out = '';
 		for(let att in this.attributes){
-			out += ' ' + att + '="' + entities.encode(this.attributes[att]) + '"';
+			out += ' ' + att + '="' + entities.encode(this.evalExpression(this.attributes[att])) + '"';
 		}
 		return out;
 	}
@@ -51,6 +52,12 @@ class Node extends Element{
 			parentState = this.parent.state;
 		}
 		this.state = Object.assign({}, parentState, this.state);
+	}
+
+	pushState(){
+		if (this.parent && this.parent.state) {
+			this.parent.state = this.state;
+		}
 	}
 
 	static renderArray(arr){

@@ -48,7 +48,8 @@ class TpBuilder{
 
 	formatOutput(){
 		this.content = beautifyHtml(this.content, {
-			preserve_newlines: false
+			preserve_newlines: false,
+			unformatted: ['script', 'style']
 		});
 		
 	}

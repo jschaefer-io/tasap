@@ -1,21 +1,21 @@
 {
-  "name": "tpbuiler",
+  "name": "tasap ",
   "version": "1.0.0",
-  "description": "",
+  "description": "Barebones Template Engine for static HTML files",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint index.js class"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jschaefer-io/tpbuiler.git"
+    "url": "git+https://github.com/jschaefer-io/tasap.git"
   },
   "author": "Jannik Schäfer <me@jschaefer.io>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jschaefer-io/tpbuiler/issues"
+    "url": "https://github.com/jschaefer-io/tasap/issues"
   },
-  "homepage": "https://github.com/jschaefer-io/tpbuiler#readme",
+  "homepage": "https://github.com/jschaefer-io/tasap#readme",
   "dependencies": {
     "glob": "^7.1.2",
     "html-entities": "^1.2.1",
@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "eslint": "^4.19.1",
-    "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
