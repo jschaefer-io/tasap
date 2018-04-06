@@ -4,7 +4,7 @@ class ModuleNode extends Node{
 	constructor(module, node, parent, getBuilder){
 		super(node, parent, getBuilder);
 		this.module = module;
-		this.state = Object.assign(this.module.attributes, this.attributes);
+		this.state = Object.assign({}, this.module.attributes, this.attributes);
 		this.moduleChildren = this.children;
 		this.buildChildrenDom(this.module.node.children);
 	}

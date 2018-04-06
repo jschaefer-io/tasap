@@ -59,9 +59,9 @@ The above example renders into the following HTML Content.
 <div class="row">
     <div class="column size-small-12 size-medium-3 size-large-7">
         <article class="offer">
-            <h3>Car 2</h3>
-            <p> This car is amazing too </p>
-            <a href="/link-to-car2.html">Buy now!</a>
+            <h3>Car 1</h3>
+            <p> This car is amazing </p>
+            <a href="/link-to-car1.html">Buy now!</a>
         </article>
     </div>
     <div class="column size-small-12 size-medium-3 size-large-7">
