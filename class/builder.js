@@ -23,7 +23,7 @@ class TpBuilder{
 			},
 			htmlBeautify: {
 				preserve_newlines: false,
-				unformatted: ['script', 'style'],
+				unformatted: [],
 				extra_liners: []
 			},
 			glob: {}

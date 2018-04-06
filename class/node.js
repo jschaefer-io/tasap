@@ -9,8 +9,8 @@ class Node extends Element{
 		this.parent = parent;
 		this.state = {};
 		this.type = node.type;
-		
-		if (this.type === 'tag'){
+
+		if (this.type === 'tag' || this.type === 'script' || this.type === 'style') {
 			this.name = node.name;
 			this.attributes = node.attribs;
 			this.buildChildrenDom(node.children);
@@ -25,25 +25,26 @@ class Node extends Element{
 	}
 	render(){
 		this.inheritState();
-
 		let out = '';
-		if (this.type === 'text') {
-			out += this.evalExpression(this.data);
-		}
-		else if (this.type === 'directive') {
-			out += '<' + this.data + '>';
-		}
-		else if (this.type === 'comment') {
-			out += '<!-- ' + this.evalExpression(this.data) + '-->';
-		}
-		else{
-			let isClosing = (Node.isClosingTag(this.name) && !this.children.length),
-				isDeclarative = Node.isDeclarative(this.name);
-			out += '<' + this.name + this.getAttributeString() + ((isClosing && !isDeclarative)? ' /' : '') + '>';
-			if (!isClosing) {
-				out += Node.renderArray(this.children);
-				out += '</' + this.name + '>';
-			}
+		switch(this.type){
+			case 'text':
+				out += this.evalExpression(this.data);
+				break;
+			case 'directive':
+				out += '<' + this.data + '>';
+				break;
+			case 'comment':
+				out += '<!-- ' + this.evalExpression(this.data) + '-->';
+				break;
+			default:
+				let isClosing = (Node.isClosingTag(this.name) && !this.children.length),
+					isDeclarative = Node.isDeclarative(this.name);
+				out += '<' + this.name + this.getAttributeString() + ((isClosing && !isDeclarative)? ' /' : '') + '>';
+				if (!isClosing) {
+					out += Node.renderArray(this.children);
+					out += '</' + this.name + '>';
+				}
+				break;
 		}
 		this.pushState();
 		return out;
