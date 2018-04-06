@@ -8,15 +8,15 @@ class Node extends Element{
 
 		this.parent = parent;
 		this.state = {};
-
 		this.type = node.type;
-		if (this.type === 'text' || this.type === 'comment') {
-			this.data = node.data;
-		}
-		else{
+		
+		if (this.type === 'tag'){
 			this.name = node.name;
 			this.attributes = node.attribs;
 			this.buildChildrenDom(node.children);
+		}
+		else{
+			this.data = node.data;
 		}
 
 		if (this.matchPattern(this.name) === true && this.constructor === Node) {
@@ -29,6 +29,9 @@ class Node extends Element{
 		let out = '';
 		if (this.type === 'text') {
 			out += this.evalExpression(this.data);
+		}
+		else if (this.type === 'directive') {
+			out += '<' + this.data + '>';
 		}
 		else if (this.type === 'comment') {
 			out += '<!-- ' + this.evalExpression(this.data) + '-->';
