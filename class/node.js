@@ -10,7 +10,7 @@ class Node extends Element{
 		this.state = {};
 
 		this.type = node.type;
-		if (this.type === 'text') {
+		if (this.type === 'text' || this.type === 'comment') {
 			this.data = node.data;
 		}
 		else{
@@ -26,9 +26,13 @@ class Node extends Element{
 		if (this.type === 'text') {
 			out += this.evalExpression(this.data);
 		}
+		else if (this.type === 'comment') {
+			out += '<!-- ' + this.evalExpression(this.data) + '-->';
+		}
 		else{
-			let isClosing = (Node.isClosingTag(this.name) && !this.children.length);
-			out += '<' + this.name + this.getAttributeString() + ((isClosing)? ' /' : '') + '>';
+			let isClosing = (Node.isClosingTag(this.name) && !this.children.length),
+				isDeclarative = Node.isDeclarative(this.name);
+			out += '<' + this.name + this.getAttributeString() + ((isClosing && !isDeclarative)? ' /' : '') + '>';
 			if (!isClosing) {
 				out += Node.renderArray(this.children);
 				out += '</' + this.name + '>';
@@ -64,7 +68,10 @@ class Node extends Element{
 		return arr.reduce((str, item)=>str+item.render(), '');
 	}
 	static isClosingTag(tag){
-		return ['br','input','meta','link'].indexOf(tag) >= 0;
+		return ['br','input','meta','link', 'img', '!DOCTYPE'].indexOf(tag) >= 0;
+	}
+	static isDeclarative(tag){
+		return ['!DOCTYPE'].indexOf(tag) >= 0;
 	}
 }
 

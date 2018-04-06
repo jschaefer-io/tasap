@@ -3,7 +3,10 @@ class Element{
 		this.getBuilder = getBuilder;
 	}
 	buildChildrenDom(children){
-		this.children = this.getBuilder().buildRenderDom(children, this, this.getBuilder);
+		this.children = [];
+		if (children) {
+			this.children = this.getBuilder().buildRenderDom(children, this, this.getBuilder);	
+		}		
 	}
 
 	evalExpression(content){
