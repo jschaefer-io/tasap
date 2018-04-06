@@ -73,3 +73,22 @@ The above example renders into the following HTML Content.
     </div>
 </div>
 ````
+
+
+## Usage
+
+``` javascript
+const tasap = require('tasap');
+
+// Compiling single fiels or content
+tasap.get(['header.html', 'index.html', 'footer.html']); // Compiles all files into one files and returns the result
+tasap.get('<div></div>'); // Compiles the given Content
+
+// Compiling multiple files
+tasap.getAll(['header.html', 'index.html', 'footer.html']); // Compiles all files into sepearte fiels and returns the array
+
+// Compile and write file
+tasap.writeFile(['index.html'], 'dist/index.html'); // Writes the compiled file to the target directory
+tasap.writeFile('<div></div>', 'dist/index.html'); // Compiles the given Content and writes it to the target directory
+tasap.writeAll('templates/*.html', 'dist/'); // Compiles all matching files to the target directory
+```

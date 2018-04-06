@@ -1,4 +1,7 @@
+const writeFile = require('write');
 const TpBuilder = require('./class/builder');
+const glob = require('glob');
+const path = require('path');
 
 function TpBuilderProcess(str){
 	let init = str;
@@ -8,4 +11,19 @@ function TpBuilderProcess(str){
 	return new TpBuilder(init).parse();
 }
 
-module.exports = TpBuilderProcess;
+module.exports = {
+	get(str){
+		return TpBuilderProcess((str));
+	},
+	getAll(arr){
+		return arr.map((item)=>this.get([item]));
+	},
+	writeFile(file, target){
+		writeFile.sync(target, TpBuilderProcess(file));
+	},
+	writeAll(items, target){
+		glob.sync(items).forEach((file)=>{
+			this.writeFile([file], target + '/' + path.basename(file))
+		});			
+	}
+};
