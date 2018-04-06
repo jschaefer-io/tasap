@@ -1,6 +1,6 @@
 {
   "name": "tasap ",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Barebones Template Engine for static HTML files",
   "main": "index.js",
   "scripts": {
