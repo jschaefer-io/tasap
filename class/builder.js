@@ -9,18 +9,30 @@ const ModuleNode = require('./module-node');
 
 
 class TpBuilder{
-	constructor(content){
+	constructor(content, options = {}){
 		this.raw = content;
 		this.content = '';
 
 		this.modules = {};
 		this.dom = [];
+		this.options = Object.assign({
+			pattern: false,
+			includes: [],
+			htmlParser: {
+				lowerCaseTags: false
+			},
+			htmlBeautify: {
+				preserve_newlines: false,
+				unformatted: ['script', 'style']
+			},
+			glob: {}
+		}, options);
 	}
 
 	includeFiles(){
 		let exp = new RegExp('{{@ (.*)}}', 'g');
 		this.raw = this.raw.replace(exp, (str, p1)=>{
-			return glob.sync(p1)
+			return glob.sync(p1, this.options.glob)
 				.map((item)=>fs.readFileSync(item, 'utf-8'))
 				.reduce((str, item)=>str + ' ' + item, '');
 		});
@@ -30,14 +42,18 @@ class TpBuilder{
 	}
 
 	parse(){
+
+		// Include Files
+		this.options.includes.forEach((item)=>{
+			this.raw = '{{@ ' + item + '}}' + '\n' + this.raw;
+		});
 		this.includeFiles();
 
+		// Start Parsing process
 		let handler = new htmlparser.DomHandler((err, dom)=>{
 			this.dom = this.buildRenderDom(dom);
 		});
-		var parser = new htmlparser.Parser(handler, {
-			lowerCaseTags: false
-		});
+		var parser = new htmlparser.Parser(handler, this.options.htmlParser);
 		parser.write(this.raw);
 		parser.end();
 
@@ -47,11 +63,7 @@ class TpBuilder{
 	}
 
 	formatOutput(){
-		this.content = beautifyHtml(this.content, {
-			preserve_newlines: false,
-			unformatted: ['script', 'style']
-		});
-		
+		this.content = beautifyHtml(this.content, this.options.htmlBeautify);
 	}
 
 	buildRenderDom(nodeArray, parent = null){

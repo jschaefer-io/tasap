@@ -8,7 +8,6 @@ class Element{
 			this.children = this.getBuilder().buildRenderDom(children, this, this.getBuilder);	
 		}		
 	}
-
 	evalExpression(content){
 		let expReplace = new RegExp('{{(.*)}}', 'g'),
 			expEval = new RegExp('{{# (.*)}}', 'g'),
@@ -23,6 +22,14 @@ class Element{
 			return evalPoly(p1);
 		});
 		return content;
+	}
+	matchPattern(str){
+		let pattern = this.getBuilder().options.pattern;
+		if (pattern !== false) {
+			let exp = new RegExp(pattern, 'g');
+			return exp.test(str);
+		}
+		return null;
 	}
 }
 

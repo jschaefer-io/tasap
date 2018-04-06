@@ -7,6 +7,10 @@ class Module extends Element{
 		this.attributes = node.attribs;
 		this.name = node.attribs.name;
 		delete this.attributes.name;
+
+		if (this.matchPattern(this.name) === false) {
+			throw new Error('Module with the name "' + this.name + '" does not match the given Pattern: ' + this.getBuilder().options.pattern);
+		}
 	}
 }
 

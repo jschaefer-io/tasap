@@ -18,6 +18,10 @@ class Node extends Element{
 			this.attributes = node.attribs;
 			this.buildChildrenDom(node.children);
 		}
+
+		if (this.matchPattern(this.name) === true && this.constructor === Node) {
+			throw new Error('Node with the name "' + this.name + '" matches the given Module-Pattern ' + this.getBuilder().options.pattern) + ' , but is not a defined Module.';
+		}
 	}
 	render(){
 		this.inheritState();
