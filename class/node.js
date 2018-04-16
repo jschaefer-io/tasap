@@ -72,6 +72,12 @@ class Node extends Element{
 		}
 	}
 
+	cleanString(string, prepend = ''){
+		string = string.replace(/\s+/g, ' ').trim() ;
+		string = string.split(' ').filter(i=>i).map(i=>prepend+i).join(' ');
+		return (string)?' ' + string:'';
+	}
+
 	static renderArray(arr){
 		return arr.reduce((str, item)=>str+item.render(), '');
 	}
