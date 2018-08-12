@@ -1,6 +1,15 @@
 const Element = require('./element');
 
+/**
+ * Main Module object
+ */
 class Module extends Element{
+
+    /**
+     * Constructor
+     * @param node node object
+     * @param getBuilder builder objet
+     */
     constructor(node, getBuilder){
         super(getBuilder);
         this.node = node;

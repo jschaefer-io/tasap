@@ -2,9 +2,17 @@ const entities = new (require('html-entities').XmlEntities);
 const Utils = require('./utils');
 const Element = require('./element');
 
-
+/**
+ * Main Node object
+ */
 class Node extends Element{
 
+    /**
+     * Constructor
+     * @param node Node object
+     * @param parent node Object
+     * @param getBuilder Main Builder object
+     */
     constructor(node, parent, getBuilder){
         super(getBuilder);
 
@@ -27,6 +35,10 @@ class Node extends Element{
         }
     }
 
+    /**
+     * Renders the node with all its children
+     * @returns string rendered html content
+     */
     render(){
         this.inheritState();
         let out = '';
@@ -64,6 +76,10 @@ class Node extends Element{
         return out;
     }
 
+    /**
+     * Builds the attribute string
+     * @returns string html attribute string
+     */
     getAttributeString(){
         let out = '';
         for (let att in this.attributes) {
@@ -74,6 +90,9 @@ class Node extends Element{
         return out;
     }
 
+    /**
+     * Inherits the local state from the parent object
+     */
     inheritState(){
         let parentState = {};
         if (this.parent && this.parent.state) {
@@ -82,24 +101,41 @@ class Node extends Element{
         this.state = Object.assign({}, parentState, this.state);
     }
 
+    /**
+     * Push the local state to the parent object
+     */
     pushState(){
         if (this.parent && this.parent.state) {
             this.parent.state = this.state;
         }
     }
 
+    /**
+     * Static helper to render a full array of nodes
+     * @param arr list of nodes
+     * @returns string rendered content
+     */
     static renderArray(arr){
         return arr.reduce((str, item) => str + item.render(), '');
     }
 
+    /**
+     * Checks the given tag string and returns if it matches a self closing tag
+     * @param tag tag string to check
+     * @returns {boolean}
+     */
     static isClosingTag(tag){
         return ['br', 'input', 'meta', 'link', 'img', '!DOCTYPE'].indexOf(tag) >= 0;
     }
 
+    /**
+     * Checks if the given tag is a declarative string
+     * @param tag tag string to check
+     * @returns {boolean}
+     */
     static isDeclarative(tag){
         return ['!DOCTYPE'].indexOf(tag) >= 0;
     }
 }
-
 
 module.exports = Node;

@@ -7,8 +7,16 @@ const Module = require('./module');
 const Node = require('./node');
 const ModuleNode = require('./module-node');
 
-
+/**
+ * Main Template Builder object
+ */
 class TpBuilder{
+
+    /**
+     * Constructor
+     * @param {string} content content to compile
+     * @param {array} options options array
+     */
     constructor(content, options = {}){
         this.raw = content;
         this.content = '';
@@ -29,6 +37,9 @@ class TpBuilder{
         }, options);
     }
 
+    /**
+     * Resolves all excludes
+     */
     includeFiles(){
         let exp = new RegExp('{{@ (.*)}}', 'g');
         this.raw = this.raw.replace(exp, (str, p1) =>{
@@ -41,6 +52,10 @@ class TpBuilder{
         }
     }
 
+    /**
+     * Starts parsing and processing the content
+     * @returns {string} the rendered html
+     */
     parse(){
         // Include Files
         this.options.includes.forEach((item) =>{
@@ -61,10 +76,19 @@ class TpBuilder{
         return this.content;
     }
 
+    /**
+     * Format the html output using beautifyHtml
+     */
     formatOutput(){
         this.content = beautifyHtml(this.content, this.options.htmlBeautify);
     }
 
+    /**
+     * Builde the rendering DOM
+     * @param nodeArray child nodes
+     * @param parent parent node
+     * @returns filtered and modified node array
+     */
     buildRenderDom(nodeArray, parent = null){
         return nodeArray.filter((item) =>{
             if (item.type === 'tag' && item.name === 'Module') {
