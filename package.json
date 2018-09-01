@@ -11,7 +11,7 @@
     "url": "git+https://github.com/jschaefer-io/tasap.git"
   },
   "author": "Jannik Schäfer <me@jschaefer.io>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jschaefer-io/tasap/issues"
   },
